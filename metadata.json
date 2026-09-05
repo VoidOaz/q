@@ -1,0 +1,6 @@
+{
+  "name": "Flux Hosting",
+  "description": "High-performance Minecraft Server Hosting platform powered by dedicated Intel Xeon E5-2690 v4 VDS infrastructure with 3 GB DDR4 RAM, 10 GB NVMe SSD, automatic official jar installer for all loaders (Vanilla, Paper, Purpur, Fabric, Forge, NeoForge, Folia, Pufferfish, Sponge, Spigot, Quilt), live console, and file manager.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
