@@ -105,16 +105,48 @@ npm start
 
 ---
 
-## 🔑 Pre-Seeded Demo Accounts
+## 🚀 Deploying to Vercel
 
-You can log in directly using the following credentials (or use the one-click demo buttons on the login screen):
+This repository is pre-configured for instant deployment on [Vercel](https://vercel.com).
 
-| Role | Username | Password | Notes |
-| :--- | :--- | :--- | :--- |
-| **Server Owner** | `flux_admin` | `flux123456` | Full unconstrained root permissions on all nodes |
-| **Team Member** | `dev_member` | `flux123456` | Member permissions on European node |
+### 1. Import into Vercel
+1. Push this repository to GitHub or GitLab.
+2. Log into [Vercel Dashboard](https://vercel.com/new).
+3. Click **Add New...** > **Project** and import your repository.
+4. Vercel automatically detects the Vite configuration via `vercel.json`:
+   - **Framework Preset:** Vite
+   - **Build Command:** `vite build`
+   - **Output Directory:** `dist`
+   - **Serverless API Function:** `api/index.ts` (handles all `/api/*` endpoints)
+
+### 2. Environment Variables (Vercel Project Settings)
+In **Project Settings** > **Environment Variables**, configure:
+
+| Variable | Description | Default / Example |
+| :--- | :--- | :--- |
+| `JWT_SECRET` | Secret key used for signing authentication tokens | `flux_hosting_jwt_secret_key_2026_super_secure` |
+| `ENCRYPTION_KEY` | AES-256 key for encrypted database storage | `flux_hosting_master_aes256_key_32chars!` |
+| `PTERODACTYL_PANEL_URL` | *(Optional)* Pre-configured Pterodactyl Panel URL | `https://panel.fluxhost.com.tr` |
+| `PTERODACTYL_API_KEY` | *(Optional)* Application API Key (`ptla_...`) | `ptla_...` |
+| `PTERODACTYL_CLIENT_API_KEY` | *(Optional)* Client API Key (`ptlc_...`) | `ptlc_...` |
+
+*(Note: VDS connection and Pterodactyl API keys can also be configured directly within the in-app Admin Console at `/admin/vds/connect` without setting environment variables).*
+
+### 3. Click Deploy
+Vercel will compile the React frontend into `dist/` and deploy the Express backend API as a Serverless Function on edge regions.
 
 ---
+
+## 🔑 Pre-Configured Operator & Administrator Accounts
+
+| Role | Username | Password | Privileges |
+| :--- | :--- | :--- | :--- |
+| **Operator / Superadmin** | `PCBC` | `PCBCAdmin123!` | Full VDS binding, Pterodactyl Panel integration, Node discovery, Server Management |
+| **New User** | Any username | 6+ characters | Standard Minecraft server deployer & manager |
+
+---
+
+## 🛠️ Local Development & Traditional Server Deployment
 
 ## 📁 Project Structure
 

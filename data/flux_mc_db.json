@@ -1,0 +1,46 @@
+{
+  "users": [
+    {
+      "id": "usr_pcbc_superadmin",
+      "username": "PCBC",
+      "email": "pcbc@fluxhost.local",
+      "passwordHash": "$2b$10$3/fuKEByYtzzSSd6z1hLrOUjcs5qs8EmtrEfpuOchHgUd12q9VdfS",
+      "role": "superadmin",
+      "isOperator": true,
+      "permissions": [
+        "vds_binding",
+        "vds_connection_management",
+        "system_admin",
+        "manage_servers",
+        "manage_nodes",
+        "operator"
+      ],
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "lastLogin": "2026-09-05T23:34:56.983Z"
+    }
+  ],
+  "servers": [],
+  "smtp": {
+    "host": "smtp.fluxhosting.io",
+    "port": 587,
+    "secure": false,
+    "user": "",
+    "pass": "",
+    "fromName": "Flux Hosting - Minecraft",
+    "fromEmail": "noreply@fluxhosting.io",
+    "isConfigured": false
+  },
+  "pterodactyl": {
+    "panelUrl": "https://panel.fluxhost.com.tr",
+    "apiKey": "",
+    "clientApiKey": "",
+    "nodeId": 1,
+    "nestId": 1,
+    "eggId": 1,
+    "locationId": 1,
+    "isConfigured": false,
+    "status": "unconfigured"
+  },
+  "emailLogs": [],
+  "resetTokens": []
+}

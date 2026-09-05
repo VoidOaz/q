@@ -4,8 +4,10 @@ import crypto from 'crypto';
 import bcrypt from 'bcryptjs';
 import { User, MinecraftServerInstance, SmtpConfig, EmailLog, PterodactylConfig } from './types.ts';
 
-const DATA_DIR = path.join(process.cwd(), 'data');
-const DB_FILE = path.join(DATA_DIR, 'flux_mc_db.json');
+export const DATA_DIR = process.env.VERCEL
+  ? path.join('/tmp', 'flux_data')
+  : path.join(process.cwd(), 'data');
+export const DB_FILE = path.join(DATA_DIR, 'flux_mc_db.json');
 
 const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || 'flux_hosting_master_aes256_key_32chars!';
 
@@ -68,8 +70,12 @@ interface DatabaseSchema {
 }
 
 function ensureDataDir(): void {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
+  try {
+    if (!fs.existsSync(DATA_DIR)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+  } catch (err) {
+    console.warn('[Database] DATA_DIR creation notice:', err);
   }
 }
 
@@ -117,8 +123,16 @@ class Database {
 
   private load(): DatabaseSchema {
     try {
-      if (fs.existsSync(DB_FILE)) {
-        const raw = fs.readFileSync(DB_FILE, 'utf-8');
+      let fileToRead = DB_FILE;
+      if (!fs.existsSync(fileToRead)) {
+        const bundledFile = path.join(process.cwd(), 'data', 'flux_mc_db.json');
+        if (fs.existsSync(bundledFile)) {
+          fileToRead = bundledFile;
+        }
+      }
+
+      if (fs.existsSync(fileToRead)) {
+        const raw = fs.readFileSync(fileToRead, 'utf-8');
         const parsed = JSON.parse(raw);
         if (parsed && Array.isArray(parsed.users) && Array.isArray(parsed.servers)) {
           const schema: DatabaseSchema = {
